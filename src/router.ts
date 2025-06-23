@@ -4,9 +4,9 @@ import About from "./Pages/About.vue";
 import Contact from "./Pages/Contact.vue";
 
 const routes = [
-  { path: "/", component: Homepage },
-  { path: "/about", component: About },
-  { path: "/contact", component: Contact },
+  { path: "/", component: Homepage, name: "Home" },
+  { path: "/about", component: About, name: "About" },
+  { path: "/contact", component: Contact, name: "Contact" },
 ];
 
 export const router = createRouter({

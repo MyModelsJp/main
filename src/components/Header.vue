@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
+
 </script>
 
 <template>
     <header
         class="w-full shadow-2xs bg-[#FFFFFF] py-10 lg:py-6 grid items-center text-black transition-all duration-300">
         <!-- Container -->
-        <div class="w-full max-w-screen-2xl mx-auto">
+        <nav class="w-full px-10 md:px-4 lg:max-w-screen-xl mx-auto flex flex-row justify-between items-center">
             <!-- Icon -->
             <div class="w-20">
                 <svg viewBox="0 0 191 40" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -21,8 +23,19 @@
                     </defs>
                 </svg>
             </div>
-            
-        </div>
+            <!-- Navigation -->
+            <div class="flex flex-row space-x-8 ">
+                <RouterLink :to="{ name: 'Home' }">
+                    Home
+                </RouterLink>
+                <RouterLink :to="{ name: 'About' }">
+                    About
+                </RouterLink>
+                <RouterLink :to="{ name: 'Contact' }">
+                    Contact
+                </RouterLink>
+            </div>
+        </nav>
 
     </header>
 </template>
