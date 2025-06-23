@@ -8,5 +8,4 @@ import ModelsContainer from '../components/ModelsContainer.vue';
 <template>
     <HeroSection />
     <ModelsContainer />
-    test
 </template>

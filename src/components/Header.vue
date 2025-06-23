@@ -7,7 +7,7 @@ import { RouterLink } from 'vue-router';
     <header
         class="w-full shadow-2xs bg-[#FFFFFF] py-10 lg:py-6 grid items-center text-black transition-all duration-300">
         <!-- Container -->
-        <nav class="w-full px-10 md:px-4 lg:max-w-screen-xl mx-auto flex flex-row justify-between items-center">
+        <nav class="w-full pl-10 lg:max-w-screen-2xl mx-auto flex flex-row justify-between items-center">
             <!-- Icon -->
             <div class="w-20">
                 <svg viewBox="0 0 191 40" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -26,13 +26,13 @@ import { RouterLink } from 'vue-router';
             <!-- Navigation -->
             <div class="flex flex-row space-x-8 ">
                 <RouterLink :to="{ name: 'Home' }">
-                    Home
+                    home
                 </RouterLink>
                 <RouterLink :to="{ name: 'About' }">
-                    About
+                    about
                 </RouterLink>
                 <RouterLink :to="{ name: 'Contact' }">
-                    Contact
+                    contact
                 </RouterLink>
             </div>
         </nav>
