@@ -3,4 +3,8 @@ import App from "./App.vue";
 import "./app.css";
 import { router } from "./router";
 
-createApp(App).use(router).mount("#app");
+const app = createApp(App);
+app.use(router);
+
+await router.isReady();
+app.mount("#app");
