@@ -1,8 +1,9 @@
 <script setup lang="ts">
-</script>
+import HeroSection from '../components/HeroSection.vue';
 
+
+
+</script>
 <template>
-    <div>
-        this is the index page
-    </div>
+    <HeroSection />
 </template>
