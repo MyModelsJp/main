@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 
+const emit = defineEmits(['scrollto'])
 </script>
 
 <template>
@@ -28,9 +29,9 @@ import { RouterLink } from 'vue-router';
                 <RouterLink :to="{ name: 'Home' }">
                     home
                 </RouterLink>
-                <RouterLink :to="{ name: 'About' }">
+                <button @click="emit('scrollto')">
                     about
-                </RouterLink>
+                </button>
                 <RouterLink :to="{ name: 'Contact' }">
                     contact
                 </RouterLink>
