@@ -29,12 +29,12 @@ const emit = defineEmits(['scrollto'])
                 <RouterLink :to="{ name: 'Home' }">
                     home
                 </RouterLink>
-                <button @click="emit('scrollto')">
+                <RouterLink :to="{ name: 'About' }">
                     about
-                </button>
-                <RouterLink :to="{ name: 'Contact' }">
-                    contact
                 </RouterLink>
+                <button @click="emit('scrollto')" class="cursor-pointer">
+                    contact
+                </button>
             </div>
         </nav>
 

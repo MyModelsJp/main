@@ -13,14 +13,14 @@
                     agencies having represented some of the fashion industry’s most iconic faces and has dominated the
                     fashion world for four decades.
                 </p>
-
+                <br>
                 <p>
                     The London-based agency focuses on the discovery, development and management of new talent.
                     Premier’s
                     three divisions (Women’s, Men and Artists) include some of the most exciting, diverse and globally
                     recognised talent across the fashion and creative industries. 
                 </p>
-
+                <br>
                 <p>
                     Carole White is a voice of authority and experience in the fashion industry. Her views and comments
                     are
