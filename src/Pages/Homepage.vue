@@ -2,9 +2,8 @@
 import HeroSection from '../components/HeroSection.vue';
 import ModelsContainer from '../components/ModelsContainer.vue';
 
-
-
 </script>
+
 <template>
     <HeroSection />
     <ModelsContainer />
