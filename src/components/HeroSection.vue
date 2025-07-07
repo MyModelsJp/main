@@ -25,7 +25,7 @@
                #978F8F 100%
              );
            ">
-        <h1 class="text-5xl font-bold mb-4">Tagline</h1>
+        <h1 class="text-5xl font-bold mb-4">MyModels.jp</h1>
         <p class="text-xl mb-6">Context</p>
     </section>
 </template>
