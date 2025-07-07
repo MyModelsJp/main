@@ -25,7 +25,7 @@ const scrollToFooter = async () => {
 </script>
 
 <template>
-    <div class="h-dvh flex flex-col">
+    <div class="min-h-screen flex flex-col relative">
         <Header @scrollto="scrollToFooter" />
         <main class="flex-1">
             <slot />

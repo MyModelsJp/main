@@ -1,14 +1,36 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+const emit = defineEmits(['scrollto']);
+const isNavbarOpen = ref(false);
+import { motion } from "motion-v"
 
-const emit = defineEmits(['scrollto'])
+const list = {
+    visible: {
+        opacity: 1, transition: {
+            when: "beforeChildren",
+            staggerChildren: 0.1,
+        },
+    },
+    hidden: {
+        opacity: 0,
+        transition: {
+            when: "afterChildren",
+        },
+    },
+}
+
+const item = {
+    visible: { opacity: 1, x: 0 },
+    hidden: { opacity: 0, x: 100 },
+}
 </script>
 
 <template>
     <header
-        class="w-full shadow-2xs bg-[#FFFFFF] py-10 lg:py-6 grid items-center text-black transition-all duration-300">
+        class="w-full shadow-2xs bg-[#FFFFFF] py-6 z-50 lg:py-6 sticky top-0 lg:grid items-center text-black transition-all duration-300">
         <!-- Container -->
-        <nav class="w-full pl-10 lg:max-w-screen-2xl mx-auto flex flex-row justify-between items-center">
+        <nav class="w-full px-10 lg:max-w-screen-2xl mx-auto flex flex-row justify-between items-center">
             <!-- Icon -->
             <div class="w-20">
                 <svg viewBox="0 0 191 40" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +47,7 @@ const emit = defineEmits(['scrollto'])
                 </svg>
             </div>
             <!-- Navigation -->
-            <div class="flex flex-row space-x-8 ">
+            <div class="hidden lg:flex flex-row space-x-8">
                 <RouterLink :to="{ name: 'Home' }">
                     home
                 </RouterLink>
@@ -36,7 +58,91 @@ const emit = defineEmits(['scrollto'])
                     contact
                 </button>
             </div>
+            <!-- Mobile Nav -->
+            <div class="lg:hidden relative">
+                <button class="menu" :class="{ opened: isNavbarOpen }" :aria-expanded="isNavbarOpen"
+                    @click="isNavbarOpen = !isNavbarOpen" aria-label="Main Menu">
+                    <svg width="25" height="25" viewBox="0 0 100 100">
+                        <path class="line line1"
+                            d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+                        <path class="line line2" d="M 20,50 H 80" />
+                        <path class="line line3"
+                            d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
+                    </svg>
+                </button>
+                <section class="absolute w-fit right-0  top-8">
+                    <AnimatePresence :initial="false">
+                        <motion.ul class="flex items-end flex-col bg-gray-500/35 rounded-md p-2" v-if="isNavbarOpen"
+                            initial="hidden" whileInView="visible" :variants="list">
+                            <motion.li :variants="item" class="w-full text-end">
+                                <RouterLink :to="{ name: 'Home' }">
+                                    home
+                                </RouterLink>
+                            </motion.li>
+                            <motion.li :variants="item" class="w-full text-end">
+                                <RouterLink :to="{ name: 'About' }">
+                                    about
+                                </RouterLink>
+                            </motion.li>
+                            <motion.button :variants="item" class="w-full text-end cursor-pointer"
+                                @click="emit('scrollto')">
+                                contact
+                            </motion.button>
+                        </motion.ul>
+                    </AnimatePresence>
+                </section>
+            </div>
         </nav>
-
     </header>
 </template>
+
+<style lang="css" scoped>
+.menu {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    padding: 0;
+}
+
+.line {
+    fill: none;
+    stroke: black;
+    stroke-width: 6;
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+        stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line1 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+}
+
+.line2 {
+    stroke-dasharray: 60 60;
+    stroke-width: 6;
+}
+
+.line3 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+}
+
+.opened .line1 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+}
+
+.opened .line2 {
+    stroke-dasharray: 1 60;
+    stroke-dashoffset: -30;
+    stroke-width: 6;
+}
+
+.opened .line3 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+}
+</style>
