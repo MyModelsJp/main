@@ -70,21 +70,25 @@ const item = {
                             d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
                     </svg>
                 </button>
-                <section class="absolute w-fit right-0  top-8">
+                <section class="absolute w-fit right-0 top-8">
                     <AnimatePresence :initial="false">
-                        <motion.ul class="flex items-end flex-col bg-gray-500/35 rounded-md p-2" v-if="isNavbarOpen"
-                            initial="hidden" whileInView="visible" :variants="list">
-                            <motion.li :variants="item" class="w-full text-end">
+                        <motion.ul
+                            class="flex items-end flex-col bg-gray-300/50 backdrop-blur-md text-white shadow-inner rounded-md p-2"
+                            v-if="isNavbarOpen" initial="hidden" whileInView="visible" :variants="list">
+                            <motion.li :variants="item"
+                                class="w-full text-end hover:text-4xl transition-all duration-300">
                                 <RouterLink :to="{ name: 'Home' }">
                                     home
                                 </RouterLink>
                             </motion.li>
-                            <motion.li :variants="item" class="w-full text-end">
+                            <motion.li :variants="item"
+                                class="w-full text-end hover:text-4xl transition-all duration-300">
                                 <RouterLink :to="{ name: 'About' }">
                                     about
                                 </RouterLink>
                             </motion.li>
-                            <motion.button :variants="item" class="w-full text-end cursor-pointer"
+                            <motion.button :variants="item"
+                                class="w-full text-end hover:text-4xl transition-all duration-300 cursor-pointer"
                                 @click="emit('scrollto')">
                                 contact
                             </motion.button>
