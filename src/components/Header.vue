@@ -74,7 +74,7 @@ watch(() => isNavbarOpen.value, (newVal) => {
             <!-- Mobile Nav -->
             <div class="lg:hidden relative min-h-10 flex items-center">
                 <AnimatePresence :initial="false">
-                    <button class="menu" :class="{ opened: isNavbarOpen }" :aria-expanded="isNavbarOpen"
+                    <motion.button class="menu" :class="{ opened: isNavbarOpen }" :aria-expanded="isNavbarOpen"
                         :initial="{ opacity: 0, scale: 0 }" :animate="{ opacity: 1, scale: 1 }"
                         :exit="{ opacity: 0, scale: 0 }" v-if="!isNavbarOpen" @click="isNavbarOpen = !isNavbarOpen"
                         aria-label="Main Menu">
@@ -85,7 +85,7 @@ watch(() => isNavbarOpen.value, (newVal) => {
                             <path class="line line3"
                                 d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
                         </svg>
-                    </button>
+                    </motion.button>
                 </AnimatePresence>
                 <!-- Content -->
                 <Teleport to="body">
@@ -95,7 +95,11 @@ watch(() => isNavbarOpen.value, (newVal) => {
                     }">
 
                         <AnimatePresence :initial="false">
-                            <motion.aside :initial="{ x: -500 }" :animate="{ x: 0 }" :exit="{ x: -500 }"
+                            <motion.aside :transition="{
+                                duration: 0.7,
+                                delay: 0,
+                                ease: [0, 0.71, 0.2, 1.01],
+                            }" :initial="{ x: -500 }" :animate="{ x: 0 }" :exit="{ x: -500 }"
                                 class="h-full w-1/2 bg-white p-4 flex flex-col gap-4" v-if="isNavbarOpen">
                                 <section class="items-end grid justify-end">
                                     <button class="menu" :class="{ opened: isNavbarOpen }" :aria-expanded="isNavbarOpen"
