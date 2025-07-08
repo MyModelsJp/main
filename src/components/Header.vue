@@ -48,9 +48,8 @@ onUnmounted(() => {
 
 <template>
     <header ref="navRef" :class="[
-        'w-full bg-[#FFFFFF] z-50 lg:grid items-center text-black transition-all duration-300',
-        isScrolled ? 'sticky top-0  py-2' : 'block py-4'
-    ]">
+        'w-full bg-[#FFFFFF] z-50 lg:grid items-center text-black transition-all duration-300 shadow-md',
+        isScrolled ? 'sticky top-0 py-2' : 'block py-4']">
         <!-- Container -->
         <nav class="w-full px-10 lg:max-w-screen-2xl mx-auto flex flex-row justify-between items-center">
             <!-- Icon -->

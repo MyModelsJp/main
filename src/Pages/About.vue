@@ -2,8 +2,9 @@
 </script>
 
 <template>
-    <div class="max-w-screen-lg mx-auto h-dvh text-center flex flex-col items-center justify-center space-y-5">
-        <h1 class="text-xl lg:text-6xl">about</h1>
+    <div
+        class="max-w-screen-lg px-10 mx-auto min-h-dvh text-center flex flex-col items-center justify-center space-y-5">
+        <h1 class="text-4xl lg:text-6xl">about</h1>
         <div class="grid grid-cols-1 lg:grid-cols-3 text-start gap-4">
             <section class="col-span-1 lg:col-span-2">
                 <p>
@@ -37,5 +38,10 @@
                 <p class="underline">info@premiermodelmanagement.com</p>
             </section>
         </div>
+
+
+    </div>
+    <div class="h-40 bg-[#B2B2B2] w-full">
+        <!-- Missing Content -->
     </div>
 </template>
