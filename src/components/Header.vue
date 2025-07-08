@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import { motion } from "motion-v"
+
 const emit = defineEmits(['scrollto']);
 const isNavbarOpen = ref(false);
-import { motion } from "motion-v"
 
 const list = {
     visible: {
@@ -24,11 +25,32 @@ const item = {
     visible: { opacity: 1, x: 0 },
     hidden: { opacity: 0, x: 100 },
 }
+
+
+
+const navRef = ref<HTMLElement | null>(null);
+const isScrolled = ref(false);
+
+// Update when user scrolls
+const handleScroll = () => {
+    isScrolled.value = window.scrollY > 0;
+};
+
+onMounted(() => {
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Run once to initialize
+});
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 <template>
-    <header
-        class="w-full shadow-2xs bg-[#FFFFFF] py-6 z-50 lg:py-6 sticky top-0 lg:grid items-center text-black transition-all duration-300">
+    <header ref="navRef" :class="[
+        'w-full bg-[#FFFFFF] z-50 lg:grid items-center text-black transition-all duration-300',
+        isScrolled ? 'sticky top-0  py-2' : 'block py-4'
+    ]">
         <!-- Container -->
         <nav class="w-full px-10 lg:max-w-screen-2xl mx-auto flex flex-row justify-between items-center">
             <!-- Icon -->
