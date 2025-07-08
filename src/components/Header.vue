@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
+import { AnimatePresence, motion } from 'motion-v'
 
 const emit = defineEmits(['scrollto']);
 const isNavbarOpen = ref(false);
@@ -20,6 +21,18 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
 });
+
+const parentVisible = ref(false);
+watch(() => isNavbarOpen.value, (newVal) => {
+    if (newVal) {
+        parentVisible.value = newVal;
+    } else {
+        setTimeout(() => {
+            parentVisible.value = newVal;
+        }, 200);
+    }
+})
+
 </script>
 
 <template>
@@ -60,9 +73,11 @@ onUnmounted(() => {
 
             <!-- Mobile Nav -->
             <div class="lg:hidden relative min-h-10 flex items-center">
-                <Transition :css="false">
+                <AnimatePresence :initial="false">
                     <button class="menu" :class="{ opened: isNavbarOpen }" :aria-expanded="isNavbarOpen"
-                        v-if="!isNavbarOpen" @click="isNavbarOpen = !isNavbarOpen" aria-label="Main Menu">
+                        :initial="{ opacity: 0, scale: 0 }" :animate="{ opacity: 1, scale: 1 }"
+                        :exit="{ opacity: 0, scale: 0 }" v-if="!isNavbarOpen" @click="isNavbarOpen = !isNavbarOpen"
+                        aria-label="Main Menu">
                         <svg width="25" height="25" viewBox="0 0 100 100">
                             <path class="line line1"
                                 d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
@@ -71,35 +86,45 @@ onUnmounted(() => {
                                 d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
                         </svg>
                     </button>
-                </Transition>
+                </AnimatePresence>
+                <!-- Content -->
                 <Teleport to="body">
-                    <div class="inset-0 fixed bg-black/5 z-50 h-full w-full" v-if="isNavbarOpen">
-                        <aside class="h-full w-1/2 bg-white p-4 flex flex-col gap-4">
-                            <section class="items-end grid justify-end">
-                                <button class="menu" :class="{ opened: isNavbarOpen }" :aria-expanded="isNavbarOpen"
-                                    @click="isNavbarOpen = !isNavbarOpen" aria-label="Main Menu">
-                                    <svg width="25" height="25" viewBox="0 0 100 100">
-                                        <path class="line line1"
-                                            d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
-                                        <path class="line line2" d="M 20,50 H 80" />
-                                        <path class="line line3"
-                                            d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
-                                    </svg>
+                    <div class="inset-0 fixed bg-black/5 h-full w-full" :class="{
+                        'opacity-0 -z-50 pointer-events-none': !parentVisible,
+                        'opacity-100 z-50 bg-black/50': parentVisible,
+                    }">
+
+                        <AnimatePresence :initial="false">
+                            <motion.aside :initial="{ x: -500 }" :animate="{ x: 0 }" :exit="{ x: -500 }"
+                                class="h-full w-1/2 bg-white p-4 flex flex-col gap-4" v-if="isNavbarOpen">
+                                <section class="items-end grid justify-end">
+                                    <button class="menu" :class="{ opened: isNavbarOpen }" :aria-expanded="isNavbarOpen"
+                                        @click="isNavbarOpen = !isNavbarOpen" aria-label="Main Menu">
+                                        <svg width="25" height="25" viewBox="0 0 100 100">
+                                            <path class="line line1"
+                                                d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+                                            <path class="line line2" d="M 20,50 H 80" />
+                                            <path class="line line3"
+                                                d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
+                                        </svg>
+                                    </button>
+                                </section>
+                                <RouterLink :to="{ name: 'Home' }"
+                                    class="w-full text-start hover:text-4xl transition-all duration-300">
+                                    home
+                                </RouterLink>
+                                <RouterLink :to="{ name: 'About' }"
+                                    class="w-full text-start hover:text-4xl transition-all duration-300">
+                                    about
+                                </RouterLink>
+                                <button
+                                    class="w-full text-start hover:text-4xl transition-all duration-300 cursor-pointer"
+                                    @click="emit('scrollto')">
+                                    contact
                                 </button>
-                            </section>
-                            <RouterLink :to="{ name: 'Home' }"
-                                class="w-full text-start hover:text-4xl transition-all duration-300">
-                                home
-                            </RouterLink>
-                            <RouterLink :to="{ name: 'About' }"
-                                class="w-full text-start hover:text-4xl transition-all duration-300">
-                                about
-                            </RouterLink>
-                            <button class="w-full text-start hover:text-4xl transition-all duration-300 cursor-pointer"
-                                @click="emit('scrollto')">
-                                contact
-                            </button>
-                        </aside>
+                            </motion.aside>
+                        </AnimatePresence>
+
                     </div>
                 </Teleport>
             </div>
