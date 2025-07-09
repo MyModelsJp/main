@@ -113,17 +113,17 @@ watch(() => isNavbarOpen.value, (newVal) => {
                                         </svg>
                                     </button>
                                 </section>
-                                <RouterLink :to="{ name: 'Home' }"
+                                <RouterLink :to="{ name: 'Home' }" @click="isNavbarOpen = !isNavbarOpen"
                                     class="w-full text-start hover:text-4xl transition-all duration-300">
                                     home
                                 </RouterLink>
-                                <RouterLink :to="{ name: 'About' }"
+                                <RouterLink :to="{ name: 'About' }" @click="isNavbarOpen = !isNavbarOpen"
                                     class="w-full text-start hover:text-4xl transition-all duration-300">
                                     about
                                 </RouterLink>
                                 <button
                                     class="w-full text-start hover:text-4xl transition-all duration-300 cursor-pointer"
-                                    @click="emit('scrollto')">
+                                    @click="emit('scrollto'); isNavbarOpen = !isNavbarOpen">
                                     contact
                                 </button>
                             </motion.aside>
