@@ -26,6 +26,6 @@
              );
            ">
         <h1 class="text-5xl font-bold mb-4">MyModels.jp</h1>
-        <p class="text-xl mb-6">Context</p>
+        <p class="text-xl mb-6">From Tokyo to the World.</p>
     </section>
 </template>

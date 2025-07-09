@@ -1,0 +1,58 @@
+export const ImageArray = [
+    {
+        ImageSrc: new URL("@/assets/Images/image.svg", import.meta.url).href,
+        Height: 165,
+        Bust: 74,
+        Waist: 58,
+        Hips: 78,
+    },
+    {
+        ImageSrc: new URL("@/assets/Images/image2.svg", import.meta.url).href,
+        Height: 165,
+        Bust: 74,
+        Waist: 58,
+        Hips: 78,
+    },
+    {
+        ImageSrc: new URL("@/assets/Images/image3.svg", import.meta.url).href,
+        Height: 177,
+        Bust: 88,
+        Waist: 62,
+        Hips: 80,
+    },
+    {
+        ImageSrc: new URL("@/assets/Images/image4.svg", import.meta.url).href,
+        Height: 177,
+        Bust: 88,
+        Waist: 62,
+        Hips: 80,
+    },
+    {
+        ImageSrc: new URL("@/assets/Images/image5.svg", import.meta.url).href,
+        Height: 174,
+        Bust: 82,
+        Waist: 64,
+        Hips: 82,
+    },
+    {
+        ImageSrc: new URL("@/assets/Images/image6.svg", import.meta.url).href,
+        Height: 174,
+        Bust: 82,
+        Waist: 64,
+        Hips: 82,
+    },
+    {
+        ImageSrc: new URL("@/assets/Images/image7.svg", import.meta.url).href,
+        Height: 165,
+        Bust: 74,
+        Waist: 58,
+        Hips: 78,
+    },
+    {
+        ImageSrc: new URL("@/assets/Images/image8.svg", import.meta.url).href,
+        Height: 165,
+        Bust: 74,
+        Waist: 58,
+        Hips: 78,
+    },
+];
