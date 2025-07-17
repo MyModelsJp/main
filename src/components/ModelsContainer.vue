@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, type ComponentPublicInstance } from 'vue'
 import { ImageArray } from '../data/model-array'
 
 const scrollToFooter = () => {
@@ -21,6 +21,14 @@ onMounted(async () => {
 
 const showOverlayIndex = ref<number | null>(null)
 const itemRefs = ref<Array<HTMLElement | null>>([])
+
+function setItemRef(el: Element | ComponentPublicInstance | null, index: number) {
+    if (el instanceof HTMLElement) {
+        itemRefs.value[index] = el
+    } else {
+        itemRefs.value[index] = null
+    }
+}
 
 let observer: IntersectionObserver | null = null
 
@@ -57,7 +65,7 @@ onBeforeUnmount(() => {
 
 <template>
     <div class="w-full grid grid-cols-1 lg:grid-cols-2 ">
-        <div v-for="(model, i) in ImageArray" :key="i" :ref="el => itemRefs[i] = el" :data-index="i"
+        <div v-for="(model, i) in ImageArray" :key="i" :ref="el => setItemRef(el, i)" :data-index="i"
             class="relative h-screen overflow-hidden group">
             <img :src="model.ImageSrc" class="absolute inset-0 object-cover w-full h-full z-0" loading="lazy" />
             <div :class="[
