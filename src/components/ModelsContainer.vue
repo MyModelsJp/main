@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import { onMounted, ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { ImageArray } from '../data/model-array'
 
 const scrollToFooter = () => {
@@ -19,26 +19,52 @@ onMounted(async () => {
     })
 });
 
-const showOverlayIndex = ref(null)
+const showOverlayIndex = ref<number | null>(null)
+const itemRefs = ref<Array<HTMLElement | null>>([])
 
-function toggleOverlay(i: any) {
-    if (window.innerWidth < 1024) {
-        showOverlayIndex.value = showOverlayIndex.value === i ? null : i
-    }
-}
+let observer: IntersectionObserver | null = null
+
+onMounted(() => {
+    if (window.innerWidth >= 1024) return // only for mobile
+
+    observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                const index = Number(entry.target.getAttribute('data-index'))
+                if (entry.isIntersecting) {
+                    showOverlayIndex.value = index
+                } else if (showOverlayIndex.value === index) {
+                    showOverlayIndex.value = null
+                }
+            })
+        },
+        {
+            threshold: 0.5,
+        }
+    )
+
+    itemRefs.value.forEach((el) => {
+        if (el) observer?.observe(el)
+    })
+})
+
+onBeforeUnmount(() => {
+    observer?.disconnect()
+})
 
 </script>
 
 
 <template>
     <div class="w-full grid grid-cols-1 lg:grid-cols-2 ">
-        <div v-for="(model, i) in ImageArray" :key="i" class="relative h-screen overflow-hidden group">
+        <div v-for="(model, i) in ImageArray" :key="i" :ref="el => itemRefs[i] = el" :data-index="i"
+            class="relative h-screen overflow-hidden group">
             <img :src="model.ImageSrc" class="absolute inset-0 object-cover w-full h-full z-0" loading="lazy" />
             <div :class="[
                 'relative flex transition-all duration-300 p-4 text-white text-xl font-bold bg-black/50 backdrop-blur-sm text-center rounded h-full items-center justify-center w-full cursor-pointer',
                 showOverlayIndex === i ? 'opacity-80' : 'opacity-0',
                 'lg:opacity-0 lg:group-hover:opacity-80'
-            ]" @click="toggleOverlay(i)">
+            ]">
                 <section class="flex flex-col gap-2">
                     <!-- Model Details -->
                     <h1>Height: {{ model.Height }}</h1>
