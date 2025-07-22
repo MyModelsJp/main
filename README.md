@@ -1,6 +1,6 @@
 # MyModels.jp
 > WIP site
-> [deployed site](www.mymodels.jp)
+> [deployed site](https://www.mymodels.jp/)
 
 ## Local Development
 
