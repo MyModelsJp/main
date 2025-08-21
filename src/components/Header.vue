@@ -66,6 +66,9 @@ watch(() => isNavbarOpen.value, (newVal) => {
                 <RouterLink :to="{ name: 'About' }" class="hover:text-xl transition-all duration-300">
                     about
                 </RouterLink>
+                <RouterLink :to="{ name: 'Team' }" class="hover:text-xl transition-all duration-300">
+                    team
+                </RouterLink>
                 <button @click="emit('scrollto')" class="cursor-pointer hover:text-xl transition-all duration-300">
                     contact
                 </button>
