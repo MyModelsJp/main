@@ -124,6 +124,9 @@ watch(() => isNavbarOpen.value, (newVal) => {
                                     class="w-full text-start hover:text-4xl transition-all duration-300">
                                     about
                                 </RouterLink>
+                                <RouterLink :to="{ name: 'Team' }" class="hover:text-xl transition-all duration-300">
+                                    team
+                                </RouterLink>
                                 <button
                                     class="w-full text-start hover:text-4xl transition-all duration-300 cursor-pointer"
                                     @click="emit('scrollto'); isNavbarOpen = !isNavbarOpen">
