@@ -6,6 +6,7 @@ const routes = [
   { path: "/", component: Homepage, name: "Home" },
   { path: "/about", component: About, name: "About" },
   { path: "/team", component: About, name: "Team" }, // to be added
+  { path: "/press", component: About, name: "Press" }, // to be added
 ];
 
 export const router = createRouter({
