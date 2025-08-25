@@ -22,7 +22,7 @@ const events = [
         </p>
 
         <Section class="w-full h-full flex flex-col space-y-6 gap-8 mb-10">
-            <template v-for="(i_, index) in Array(3)">
+            <template v-for="(_i, index) in Array(3)">
                 <div class="flex flex-col md:grid md:grid-cols-5 gap-8 items-center justify-center">
                     <div class="w-full h-96 col-span-3" :class="index % 2 === 0 ? 'md:order-1' : 'md:order-2'">
                         <img :src="events[0].img" alt="placeholder" class="object-cover h-full w-full">
